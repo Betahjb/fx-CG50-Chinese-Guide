@@ -2,6 +2,14 @@
 
 > 面向 Casio fx-CG50 的中文入门资料：从安装现成 `.g3a`、使用 PythonExtra 运行自己的 `.py`，到理解 `C + fxSDK + gint` 原生开发与开源小游戏移植。
 
+**版本：** 1.0（2026-09-13）<br>
+**实测环境：** Casio fx-CG50 + Windows 10
+
+- [下载排版完整的 Word 版教程](docs/downloads/fx-CG50-Chinese-Guide-v1.0.docx)
+- [直接查看 Mario 风格教学 Demo](examples/mario/mario_cg50_v3.py)
+- [先运行最小按键测试](examples/key-test/keytest_v2.py)
+- [查看专题文档目录](docs/README.md)
+
 ![Mario running on fx-CG50](docs/images/mario-running.jpg)
 
 ## 这是什么？
@@ -98,7 +106,7 @@ fxSDK / gint 还支持部分 fx-CG10 / fx-CG20 等 fx-CG 系列机型，但不�
 fx-CG50 storage/
 ├── PythonExtra.g3a
 ├── GravityDuck.g3a
-├── mario_cg50.py
+├── mario_cg50_v3.py
 ├── @MainMem/
 └── ...
 ```
@@ -422,11 +430,17 @@ TypeError: can't convert list to int
 
 解决方法是逐键调用 `gint.keydown()`，然后在 Python 里组合布尔条件。
 
+![PythonExtra keydown_all error on fx-CG50](docs/images/pythonextra-keydown-error.jpg)
+
 ### 坑 5：Python 慢，不等于 fx-CG50 硬件本身“很弱”
 
 解释器、绘制 API 调用次数、每帧处理的 Tile 数量、屏幕分辨率都会影响最终速度。改成原生 C 后，性能模型会完全不同。
 
-### 坑 6：USB 线可能只能充电
+### 坑 6：画面看起来不对，不一定是碰撞逻辑出错
+
+横版游戏同时涉及世界坐标、屏幕坐标、Sprite 锚点与碰撞盒。角色视觉位置偏移时，先分别画出 Sprite 边界和碰撞盒，确认到底是渲染偏移，还是物理坐标真的算错。
+
+### 坑 7：USB 线可能只能充电
 
 如果 Windows 看不到计算器存储盘，先确认线缆真的支持数据传输。
 
@@ -458,11 +472,17 @@ TypeError: can't convert list to int
 fx-CG50-Chinese-Guide/
 ├── README.md
 ├── LICENSE
+├── CONTRIBUTING.md
+├── THIRD_PARTY_NOTICES.md
 ├── docs/
+│   ├── README.md
 │   ├── images/
 │   │   ├── cg50-menu.jpg
 │   │   ├── gravityduck-page.png
-│   │   └── mario-running.jpg
+│   │   ├── mario-running.jpg
+│   │   └── pythonextra-keydown-error.jpg
+│   ├── downloads/
+│   │   └── fx-CG50-Chinese-Guide-v1.0.docx
 │   ├── g3a-history.md
 │   ├── pythonextra.md
 │   └── porting-guide.md
@@ -521,4 +541,4 @@ fx-CG50-Chinese-Guide/
 
 ## License
 
-本仓库自编文档与代码以 `LICENSE` 文件为准。第三方项目、链接及其素材仍遵循各自原始许可证和权利声明。
+本仓库采用分范围授权：原创示例代码使用 MIT License；原创文档使用 CC BY 4.0。具体边界以 [`LICENSE`](LICENSE) 和 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) 为准。第三方项目、名称、链接及素材仍遵循各自原始许可证和权利声明。

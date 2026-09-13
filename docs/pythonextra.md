@@ -61,6 +61,11 @@ keytest_v2.py
 mario_cg50_v3.py
 ```
 
+本仓库对应文件：
+
+- [`examples/key-test/keytest_v2.py`](../examples/key-test/keytest_v2.py)
+- [`examples/mario/mario_cg50_v3.py`](../examples/mario/mario_cg50_v3.py)
+
 复制到计算器可以被 PythonExtra 浏览的位置。实机上进入：
 
 ```text
